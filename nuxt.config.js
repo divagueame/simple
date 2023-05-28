@@ -19,7 +19,27 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+      script: [
+        {
+          innerHTML: `
+        window._historyCache = {
+            replaceState: window.history.replaceState,
+            pushState: window.history.pushState
+        };
+     `,
+        },
+        {
+          src: "https://appsforoffice.microsoft.com/lib/1/hosted/office.js",
+        },
+        {
+          innerHTML: `
+        // And restore them
+        window.history.replaceState = window._historyCache.replaceState;
+        window.history.pushState = window._historyCache.pushState;
+     `,
+        },
+      ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
